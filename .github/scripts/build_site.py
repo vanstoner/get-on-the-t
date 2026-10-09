@@ -106,7 +106,7 @@ def self_test():
         check("fails: a link to a page that does not exist", bool(problems(d)))
     with tempfile.TemporaryDirectory() as d:
         build(rendered, d)
-        os.remove(os.path.join(d, "brand", "court-lines.svg"))
+        os.remove(os.path.join(d, "brand", "mark.svg"))
         check("fails: the stylesheet's background image is missing", bool(problems(d)))
     print(f"{total - failed} expectation(s) passed, {failed} failed.")
     return 1 if failed else 0
