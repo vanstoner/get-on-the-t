@@ -44,8 +44,21 @@ section.band p.sub { color: var(--muted); margin: 0 0 28px; }
 .prose h2 { margin-top: 32px; font-size: 22px; }
 .prose li { margin: 6px 0; }
 .prose em { color: var(--muted); }
-/* Support and privacy: faint court lines behind the text (brand/court-lines.svg). */
-body.doc { background: var(--wall) url("brand/court-lines.svg") center top / min(100%, 760px) auto no-repeat; }
+/* The page as a front wall: the out line across the top, the tin above the
+   footer. Squash at the edges, nothing behind the text. */
+body { border-top: 6px solid var(--court-red); }
+/* The tin: brushed grey under a red top line, branded like a real one. */
+.tin { margin-top: 48px; height: 64px; display: flex; align-items: center; justify-content: space-around;
+  border-top: 8px solid var(--court-red); border-radius: 2px;
+  background: linear-gradient(180deg, #c5ccd3 0%, #9aa3ad 45%, #7d8792 100%); overflow: hidden; }
+.tin span { display: flex; align-items: center; gap: 8px; color: #14202e; font-weight: 800; font-size: 15px; letter-spacing: .02em; white-space: nowrap; }
+.tin img { width: 28px; height: 28px; }
+.tin span:nth-child(n+3) { display: none; }
+@media (min-width: 640px) { .tin span:nth-child(n+3) { display: flex; } }
+footer { border-top: 0; }
+/* A section starts with the ball: brand/mark.svg, the double yellow dot. */
+.prose h2 { display: flex; align-items: center; gap: 12px; }
+.prose h2::before { content: ""; flex: none; width: 26px; height: 26px; background: url("brand/mark.svg") center / contain no-repeat; }
 .hero .logo { width: 128px; height: 128px; }
 footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
 footer a { color: var(--muted); }
