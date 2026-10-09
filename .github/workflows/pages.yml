@@ -9,9 +9,9 @@ name: Website
 on:
   push:
     branches: [main]
-    paths: [site/**, PRIVACY.md, icon.png, .github/workflows/pages.yml, .github/scripts/build_site.py]
+    paths: [site/**, brand/**, PRIVACY.md, icon.png, .github/workflows/pages.yml, .github/scripts/build_site.py]
   pull_request:
-    paths: [site/**, PRIVACY.md, icon.png, .github/workflows/pages.yml, .github/scripts/build_site.py]
+    paths: [site/**, brand/**, PRIVACY.md, icon.png, .github/workflows/pages.yml, .github/scripts/build_site.py]
   workflow_dispatch:
 
 concurrency:

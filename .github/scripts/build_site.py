@@ -12,6 +12,7 @@ really in it, and every local link and image points at a file that exists.
 """
 
 import html.parser
+import re
 import os
 import shutil
 import sys
@@ -41,6 +42,8 @@ def build(privacy_html, out, root=ROOT):
         if f != "privacy.template.html":
             shutil.copy(os.path.join(site, f), out)
     shutil.copy(os.path.join(root, "icon.png"), os.path.join(out, "icon.png"))
+    # The brand SVGs, so pages and the stylesheet can use them.
+    shutil.copytree(os.path.join(root, "brand"), os.path.join(out, "brand"), dirs_exist_ok=True)
     with open(os.path.join(site, "privacy.template.html"), encoding="utf-8") as fh:
         template = fh.read()
     if template.count(MARK) != 1:
@@ -70,6 +73,11 @@ def problems(out):
                 target = "index.html"
             if not os.path.exists(os.path.join(out, target)):
                 found.append(f"{page} links to {link}, which is not in the site")
+    # The stylesheet's url(...) references, which the page check cannot see.
+    with open(os.path.join(out, "styles.css"), encoding="utf-8") as fh:
+        for ref in re.findall(r"url\(['\"]?([^'\")]+)", fh.read()):
+            if not os.path.exists(os.path.join(out, ref)):
+                found.append(f"styles.css uses {ref}, which is not in the site")
     return found
 
 
@@ -96,6 +104,10 @@ def self_test():
         with open(os.path.join(d, "support.html"), "a", encoding="utf-8") as fh:
             fh.write('<a href="faq.html">x</a>')
         check("fails: a link to a page that does not exist", bool(problems(d)))
+    with tempfile.TemporaryDirectory() as d:
+        build(rendered, d)
+        os.remove(os.path.join(d, "brand", "court-lines.svg"))
+        check("fails: the stylesheet's background image is missing", bool(problems(d)))
     print(f"{total - failed} expectation(s) passed, {failed} failed.")
     return 1 if failed else 0
 
