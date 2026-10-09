@@ -11,6 +11,7 @@ build, never copied by hand. Then every page is checked: the privacy text is
 really in it, and every local link and image points at a file that exists.
 """
 
+import hashlib
 import html.parser
 import re
 import os
@@ -50,6 +51,19 @@ def build(privacy_html, out, root=ROOT):
         raise ValueError("privacy.template.html must hold the marker exactly once")
     with open(os.path.join(out, "privacy.html"), "w", encoding="utf-8") as fh:
         fh.write(template.replace(MARK, privacy_html))
+    # Pages lets browsers keep styles.css for ten minutes. A version that
+    # changes with its content makes every page fetch the stylesheet it was
+    # built with, never a stale one.
+    with open(os.path.join(out, "styles.css"), "rb") as fh:
+        version = hashlib.sha256(fh.read()).hexdigest()[:10]
+    for page in PAGES:
+        path = os.path.join(out, page)
+        with open(path, encoding="utf-8") as fh:
+            text = fh.read()
+        if 'href="styles.css"' not in text:
+            raise ValueError(f"{page} does not link styles.css")
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(text.replace('href="styles.css"', f'href="styles.css?v={version}"'))
 
 
 def problems(out):
@@ -61,6 +75,9 @@ def problems(out):
             continue
         with open(path, encoding="utf-8") as fh:
             text = fh.read()
+        for img in re.findall(r"<img\b[^>]*>", text):
+            if "width=" not in img or "height=" not in img:
+                found.append(f"{page} has an image without a width and height, which draws at full size if the stylesheet is missing: {img}")
         if page == "privacy.html" and ("<h1" not in text or MARK in text):
             found.append("privacy.html does not hold the rendered PRIVACY.md")
         p = Links()
@@ -68,7 +85,7 @@ def problems(out):
         for link in p.found:
             if link.startswith(("http://", "https://", "mailto:", "#")):
                 continue
-            target = link.split("#")[0] or "index.html"
+            target = link.split("#")[0].split("?")[0] or "index.html"
             if target in ("./", "."):
                 target = "index.html"
             if not os.path.exists(os.path.join(out, target)):
@@ -104,6 +121,13 @@ def self_test():
         with open(os.path.join(d, "support.html"), "a", encoding="utf-8") as fh:
             fh.write('<a href="faq.html">x</a>')
         check("fails: a link to a page that does not exist", bool(problems(d)))
+    with tempfile.TemporaryDirectory() as d:
+        build(rendered, d)
+        with open(os.path.join(d, "index.html"), encoding="utf-8") as fh:
+            check("healthy: pages link a versioned stylesheet", 'href="styles.css?v=' in fh.read())
+        with open(os.path.join(d, "support.html"), "a", encoding="utf-8") as fh:
+            fh.write('<img src="icon.png" alt="">')
+        check("fails: an image without a size", bool(problems(d)))
     with tempfile.TemporaryDirectory() as d:
         build(rendered, d)
         os.remove(os.path.join(d, "brand", "mark.svg"))
