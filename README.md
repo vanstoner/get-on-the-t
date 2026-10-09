@@ -1,3 +1,5 @@
+<p align="center"><img src="brand/banner.svg" alt="Get on the T: Squash Club Organiser" width="100%"></p>
+
 # Get on the T
 
 **Squash Club Organiser.** An app for whoever runs a squash club's evenings.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+  <title>Get on the T: the ball</title>
+  <defs><radialGradient id="shine" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#3a4656"/><stop offset=".45" stop-color="#14202e"/><stop offset="1" stop-color="#05080c"/></radialGradient></defs>
+  <circle cx="180" cy="180" r="178" fill="url(#shine)"/>
+  <path d="M88 100H272V138H200V274H160V138H88Z" fill="#ffffff"/>
+  <g transform="rotate(-30 276 284)"><circle cx="262" cy="284" r="16" fill="#ffd400"/><circle cx="298" cy="284" r="16" fill="#ffd400"/></g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320">
+  <title>Get on the T: Squash Club Organiser</title>
+  <defs><radialGradient id="shine" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#3a4656"/><stop offset=".45" stop-color="#14202e"/><stop offset="1" stop-color="#05080c"/></radialGradient></defs>
+  <rect width="1280" height="320" rx="24" fill="#14202e"/>
+  <g fill="none" stroke="#d6283a" stroke-width="5" opacity=".28">
+    <path d="M0 150H1280"/><path d="M640 150V320"/>
+    <path d="M0 150V250H200V150"/><path d="M1280 150V250H1080V150"/>
+  </g>
+  <g transform="translate(70 40)">
+    <circle cx="120" cy="120" r="120" fill="#d6283a"/>
+    <circle cx="120" cy="120" r="104" fill="url(#shine)"/>
+    <path d="M66 74H174V96H132V176H108V96H66Z" fill="#ffffff"/>
+    <g transform="rotate(-30 176 180)"><circle cx="168" cy="180" r="9.5" fill="#ffd400"/><circle cx="189" cy="180" r="9.5" fill="#ffd400"/></g>
+  </g>
+  <text x="360" y="168" font-family="Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="104" font-weight="800" fill="#ffffff" letter-spacing="-2">Get on the T</text>
+  <text x="364" y="232" font-family="Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#f2c27b">Squash Club Organiser</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 970" preserveAspectRatio="xMidYMin slice">
+  <title>A squash court from above, as faint lines</title>
+  <g fill="none" stroke="#d6283a" stroke-width="6" opacity=".14">
+    <rect x="3" y="3" width="634" height="964"/>
+    <path d="M3 544H637"/>
+    <path d="M320 544V967"/>
+    <path d="M3 544V704H163V544"/>
+    <path d="M637 544V704H477V544"/>
+  </g>
+</svg>
