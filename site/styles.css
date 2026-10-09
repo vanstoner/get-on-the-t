@@ -47,7 +47,15 @@ section.band p.sub { color: var(--muted); margin: 0 0 28px; }
 /* The page as a front wall: the out line across the top, the tin above the
    footer. Squash at the edges, nothing behind the text. */
 body { border-top: 6px solid var(--court-red); }
-footer { box-shadow: 0 -14px 0 var(--court-red); margin-top: 48px; }
+/* The tin: brushed grey under a red top line, branded like a real one. */
+.tin { margin-top: 48px; height: 64px; display: flex; align-items: center; justify-content: space-around;
+  border-top: 8px solid var(--court-red); border-radius: 2px;
+  background: linear-gradient(180deg, #c5ccd3 0%, #9aa3ad 45%, #7d8792 100%); overflow: hidden; }
+.tin span { display: flex; align-items: center; gap: 8px; color: #14202e; font-weight: 800; font-size: 15px; letter-spacing: .02em; white-space: nowrap; }
+.tin img { width: 28px; height: 28px; }
+.tin span:nth-child(n+3) { display: none; }
+@media (min-width: 640px) { .tin span:nth-child(n+3) { display: flex; } }
+footer { border-top: 0; }
 /* A section starts with the ball: brand/mark.svg, the double yellow dot. */
 .prose h2 { display: flex; align-items: center; gap: 12px; }
 .prose h2::before { content: ""; flex: none; width: 26px; height: 26px; background: url("brand/mark.svg") center / contain no-repeat; }
