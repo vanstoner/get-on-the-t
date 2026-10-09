@@ -1,0 +1,32 @@
+name: Ask for a feature
+description: Something you'd like Get on the T to do
+labels: [feature-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea. **Issues here are public: please never include anyone's name**, a photo, or other personal details. Say "a player" or "a junior" instead.
+  - type: textarea
+    id: want
+    attributes:
+      label: What would you like it to do?
+      description: In your own words. The situation at the club where you'd use it helps most.
+      placeholder: On a club night, when …, I'd like to …
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part is it about?
+      options:
+        - Club nights
+        - Team round robins
+        - Knockouts
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: What do you do today instead?
+      description: Optional. A paper list, a spreadsheet, a WhatsApp poll…

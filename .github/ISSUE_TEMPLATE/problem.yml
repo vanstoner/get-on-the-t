@@ -1,0 +1,33 @@
+name: Something's wrong
+description: The app did something it shouldn't, or didn't do something it should
+labels: [problem]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Sorry about that. **Issues here are public: please never include anyone's name**, and don't attach screenshots from a real club night that show members' names.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: I tapped …, and …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: App version
+      description: Shown at the bottom of the app's home screen, for example "0.1.0 (build 12)".
+  - type: dropdown
+    id: phone
+    attributes:
+      label: Phone
+      options:
+        - Android
+        - iPhone

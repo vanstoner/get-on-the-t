@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Email instead
+    url: mailto:robvanstone+getonthet@gmail.com
+    about: If you'd rather not use GitHub. Please still leave out anyone's name.
